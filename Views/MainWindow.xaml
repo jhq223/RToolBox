@@ -79,9 +79,9 @@
                         <ColumnDefinition Width="346*"/>
                     </Grid.ColumnDefinitions>
                     <Label Content="Page3"/>
-                    <ListBox Name="all_list">
+                    <ListView Name="all_list">
 
-                    </ListBox>
+                    </ListView>
                 </Grid>
             </TabItem>
 

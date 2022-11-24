@@ -31,6 +31,7 @@ clr.AddReference(r"wpf\PresentationFramework")
 from System.IO import *
 from System.Windows.Markup import XamlReader
 from System.Windows import *
+from System.Windows.Controls import ListViewItem
 
 
 class MainWindow(ViewBase):
@@ -76,8 +77,7 @@ class MainWindow(ViewBase):
             for datatxt in LoadPlugin.plugins_list:
                 data = json.loads(datatxt)
                 self.All_list.Items.Add(data["name"])
-
-
+            self.All_list.MouseDoubleClick += RoutedEventHandler(self.ItemMouseClick)
 
             app = Application()
             app.Run(self.window)
@@ -124,6 +124,12 @@ class MainWindow(ViewBase):
     @staticmethod
     def About_Click(sender, e):
         win = AboutWindow()
+
+    @staticmethod
+    def ItemMouseClick(sender, e):
+        if not sender.SelectedItem is None:
+            print(sender.SelectedItem)
+            print(sender.SelectedIndex)
 
     @staticmethod
     def RunPlugin(data):
