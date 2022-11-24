@@ -18,10 +18,10 @@ import sys
 
 
 class LoadPlugin:
+    plugins_list = []
 
     def __init__(self):
-        global plugins_list
-        plugins_list = dict()
+
         self.Load()
 
     def Load(self):
@@ -31,15 +31,9 @@ class LoadPlugin:
                 continue
             self.Get(path)
 
-    @staticmethod
-    def Get(path):
+    def Get(self, path):
         with open(os.path.join(path, "config.json"), 'r', encoding='utf-8') as f:
             config_txt = f.read()
-        data = json.loads(config_txt)
+        # data = json.loads(config_txt)
         sys.path.append(path)
-        module = __import__(data["data"][1], fromlist=[data["data"][0], ])
-        pluginClass = getattr(module, data["data"][1])
-        pluginClass()
-
-    def Run(self, pluginInfo):
-        pass
+        self.plugins_list.append(config_txt)

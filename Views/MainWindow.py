@@ -13,7 +13,8 @@
 2022/11/23 17:32        1.0             None
 """
 import sys
-
+import json
+import os
 import clr
 
 from Views.SearchWindow import SearchWindow
@@ -66,6 +67,9 @@ class MainWindow(ViewBase):
             加载插件
             """
             LoadPlugin()
+            for datatxt in LoadPlugin.plugins_list:
+                data = json.loads(datatxt)
+                self.RunPlugin(data)
 
             app = Application()
             app.Run(self.window)
@@ -112,3 +116,9 @@ class MainWindow(ViewBase):
     @staticmethod
     def About_Click(sender, e):
         win = AboutWindow()
+
+    @staticmethod
+    def RunPlugin(data):
+        module = __import__(data["data"][1], fromlist=[data["data"][0], ])
+        pluginClass = getattr(module, data["data"][1])
+        pluginClass()
