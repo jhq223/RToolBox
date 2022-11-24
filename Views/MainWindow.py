@@ -25,6 +25,7 @@ from Views.PluginWindow import PluginWindow
 from Views.ViewBase import ViewBase
 from Helpers.PluginManege.InstallPlugin import InstallPlugin
 from Helpers.PluginManege.LoadPlugin import LoadPlugin
+
 clr.AddReference(r"wpf\PresentationFramework")
 
 from System.IO import *
@@ -67,9 +68,16 @@ class MainWindow(ViewBase):
             加载插件
             """
             LoadPlugin()
+
+            """
+            
+            """
+            self.All_list = LogicalTreeHelper.FindLogicalNode(self.window, "all_list")
             for datatxt in LoadPlugin.plugins_list:
                 data = json.loads(datatxt)
-                self.RunPlugin(data)
+                self.All_list.Items.Add(data["name"])
+
+
 
             app = Application()
             app.Run(self.window)
