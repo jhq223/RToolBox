@@ -1,40 +1,87 @@
 <Window
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       Title="Main" Width="640" Height="480"
+       Title="RToolBox" Width="800" Height="600"
        WindowStartupLocation="CenterScreen">
-        <Grid>
-        <Menu>
-            <MenuItem Header="File" Name="f">
-                <MenuItem Header="Open"/>
-                <MenuItem Header="Save"/>
+<Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="23"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Menu Background="White" Height="23" VerticalAlignment="Center">
+            <MenuItem Header="文件(_A)">
+                <MenuItem Header="安装" Name = "install_item"/>
+                <MenuItem Header="退出" Name = "exit_item"/>
             </MenuItem>
-            <MenuItem Header="bianj">
-                <MenuItem Header="Test"/>
+            <MenuItem Header="搜索(_F)" Name = "search_item"/>
+            <MenuItem Header="设置(_U)" Name = "setting_item"/>
+            <MenuItem Header="插件(_E)">
+                <MenuItem Header="插件管理" Name = "plugin_item"/>
             </MenuItem>
-            <MenuItem Header="bianj">
-                <MenuItem Header="Test"/>
-            </MenuItem>
-            <MenuItem Header="bianj">
-                <MenuItem Header="Test"/>
-            </MenuItem>
-            <MenuItem Header="bianj">
-                <MenuItem Header="Test"/>
-            </MenuItem>
-            <MenuItem Header="bianj">
-                <MenuItem Header="Test"/>
-            </MenuItem>
-            <MenuItem Header="bianj">
-                <MenuItem Header="Test"/>
-            </MenuItem>
-            <MenuItem Header="bianj">
-                <MenuItem Header="Test"/>
-            </MenuItem>
-            <MenuItem Header="帮助">
-                <MenuItem Header="Test"/>
+            <MenuItem Header="帮助(_H)">
+                <MenuItem Header="帮助" Name = "help_item"/>
+                <MenuItem Header="在线文档" Name = "doc_item"/>
                 <Separator/>
+                <MenuItem Header="关于" Name = "about_item"/>
             </MenuItem>
         </Menu>
-        <Button Name="button1" Content="Button" HorizontalAlignment="Left" Margin="65,145,0,0" VerticalAlignment="Top" Width="75"/>
+        <TabControl Name="tabcontrol" Grid.Row="1">
+            <TabControl.Resources>
+                <Style TargetType="TabItem">
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="TabItem">
+                                <Grid Name="Panel">
+                                    <ContentPresenter x:Name="ContentSite"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        ContentSource="Header"
+                                        Margin="10,2"/>
+                                </Grid>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsSelected" Value="True">
+                                        <Setter TargetName="Panel" Property="Background" Value="WhiteSmoke" />
+                                    </Trigger>
+                                    <Trigger Property="IsSelected" Value="False">
+                                        <Setter TargetName="Panel" Property="Background" Value="LightGray" />
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </TabControl.Resources>
+            <TabItem HorizontalAlignment="Left" Height="19" Header="收藏" VerticalAlignment="Center" Width="59">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="51*"/>
+                        <ColumnDefinition Width="346*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Page1"/>
+                </Grid>
+            </TabItem>
+            <TabItem HorizontalAlignment="Left" Height="19" Header="分类" VerticalAlignment="Center" Width="59">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="51*"/>
+                        <ColumnDefinition Width="346*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Page2"/>
+                </Grid>
+            </TabItem>
+            <TabItem HorizontalAlignment="Left" Height="19" Header="全部" VerticalAlignment="Center" Width="59">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="51*"/>
+                        <ColumnDefinition Width="346*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Page3"/>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
     </Grid>
 </Window>

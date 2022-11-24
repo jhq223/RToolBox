@@ -1,7 +1,7 @@
 <Window
        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-       Title="关于" Width="640" Height="480"
+       Title="搜索" Width="640" Height="480"
        WindowStartupLocation="CenterScreen">
        <Grid>
        </Grid>
