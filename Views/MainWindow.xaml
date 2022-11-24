@@ -3,7 +3,7 @@
        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
        Title="RToolBox" Width="800" Height="600"
        WindowStartupLocation="CenterScreen">
-<Grid>
+        <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>

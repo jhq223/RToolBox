@@ -12,6 +12,7 @@
 --------------------       --------        -----------
 2022/11/23 17:32        1.0             None
 """
+import sys
 
 import clr
 
@@ -21,7 +22,8 @@ from Views.HelpWindow import HelpWindow
 from Views.AboutWindow import AboutWindow
 from Views.PluginWindow import PluginWindow
 from Views.ViewBase import ViewBase
-
+from Helpers.PluginManege.InstallPlugin import InstallPlugin
+from Helpers.PluginManege.LoadPlugin import LoadPlugin
 clr.AddReference(r"wpf\PresentationFramework")
 
 from System.IO import *
@@ -59,6 +61,12 @@ class MainWindow(ViewBase):
             """
             注册和绑定菜单事件 -- 结束
             """
+
+            """
+            加载插件
+            """
+            LoadPlugin()
+
             app = Application()
             app.Run(self.window)
         except Exception as ex:
@@ -70,11 +78,11 @@ class MainWindow(ViewBase):
 
     @staticmethod
     def Install_Click(sender, e):
-        MessageBox.Show("点击了安装!", "安装")
+        InstallPlugin()
 
     @staticmethod
     def Exit_Click(sender, e):
-        MessageBox.Show("点击了退出!", "退出")
+        pass
 
     @staticmethod
     def Search_Click(sender, e):
