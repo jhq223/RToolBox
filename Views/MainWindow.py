@@ -128,11 +128,11 @@ class MainWindow(ViewBase):
     @staticmethod
     def ItemMouseClick(sender, e):
         if not sender.SelectedItem is None:
-            print(sender.SelectedItem)
-            print(sender.SelectedIndex)
+            # print(sender.SelectedItem)
+            datatxt = LoadPlugin.plugins_list[sender.SelectedIndex]
+            data = json.loads(datatxt)
+            module = __import__(data["data"][1], fromlist=[data["data"][0], ])
+            pluginClass = getattr(module, data["data"][1])
+            pluginClass()
 
-    @staticmethod
-    def RunPlugin(data):
-        module = __import__(data["data"][1], fromlist=[data["data"][0], ])
-        pluginClass = getattr(module, data["data"][1])
-        pluginClass()
+
