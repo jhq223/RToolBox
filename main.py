@@ -13,6 +13,7 @@
 2022/11/23 17:32        1.0             None
 """
 
+import requests
 import clr
 from System.Threading import Thread, ThreadStart, ApartmentState
 from Views.MainWindow import MainWindow

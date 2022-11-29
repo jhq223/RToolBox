@@ -34,8 +34,11 @@ class Plugin2(ViewBase):
     def Button1_Click(self, sender, e):
         url = "http://fanyi.youdao.com/translate?&doctype=json&type=EN2ZH_CN&i="
         text1 = self.Text1.Text
-        r = requests.get(str(url + text1))
-        datajson = json.loads(r.content)
-        data = datajson["translateResult"][0][0]
-        self.Text2.Text = data["tgt"]
+        if not text1 == "":
+            r = requests.get(str(url + text1))
+            datajson = json.loads(r.content)
+            data = datajson["translateResult"][0][0]
+            self.Text2.Text = data["tgt"]
+        else:
+            MessageBox.Show("请输入内容！！！")
 
