@@ -74,11 +74,6 @@
             </TabItem>
             <TabItem HorizontalAlignment="Left" Height="19" Header="全部" VerticalAlignment="Center" Width="59">
                 <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="51*"/>
-                        <ColumnDefinition Width="346*"/>
-                    </Grid.ColumnDefinitions>
-                    <Label Content="Page3"/>
                     <ListView Name="all_list">
 
                     </ListView>

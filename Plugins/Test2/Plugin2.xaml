@@ -1,0 +1,16 @@
+<Window
+       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+       Title="翻译" Width="640" Height="480"
+       WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TextBox Name="text1" Grid.Row="0"/>
+        <TextBox Name="text2" Grid.Row="1"/>
+        <Button Name="button1" Grid.Row="2" Content="翻译"/>
+    </Grid>
+</Window>

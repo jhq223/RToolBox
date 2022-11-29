@@ -17,6 +17,10 @@ import clr
 from System.Threading import Thread, ThreadStart, ApartmentState
 from Views.MainWindow import MainWindow
 
+appconfig = {
+    "version": "0.1"
+}
+
 if __name__ == '__main__':
     thread = Thread(ThreadStart(MainWindow))
     thread.SetApartmentState(ApartmentState.STA)

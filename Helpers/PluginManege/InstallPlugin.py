@@ -33,13 +33,16 @@ class InstallPlugin:
     @staticmethod
     def Install(path):
         f = zipfile.ZipFile(path, 'r')
-        data_txt = f.read("config.json")
-        data = json.loads(data_txt)
-        plugin_name = data["name"]
-        install_path = os.path.join("Plugins", plugin_name)
-        for file in f.namelist():
-            f.extract(file, install_path)
-        MessageBox.Show("插件安装成功!", "提示")
+        if "config.json" in f.namelist():
+            data_txt = f.read("config.json")
+            data = json.loads(data_txt)
+            plugin_name = data["name"]
+            install_path = os.path.join("Plugins", plugin_name)
+            for file in f.namelist():
+                f.extract(file, install_path)
+            MessageBox.Show("插件安装成功!", "提示")
+        else:
+            MessageBox.Show("不是插件包或者插件包已损坏")
 
     @staticmethod
     def ChooseFile():
