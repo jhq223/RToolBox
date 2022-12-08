@@ -12,16 +12,22 @@
 --------------------       --------        -----------
 2022/12/7 19:13        1.0             None
 """
+import importlib
 
 from ViewModels.BaseViewModel import BaseViewModel
 from ViewModels.SearchVIewModel import SearchViewModel
 from Views.SearchView import SearchView
+from Views.NewView import NewView
+from ViewModels.NewViewModel import NewViewModel
+
+
 class MainViewModel(BaseViewModel):
     def __init__(self):
         super(MainViewModel, self).__init__()
 
     def m_new_select(self, weight):
-        pass
+        view_model = NewViewModel()
+        NewView(view_model)
 
     def m_install_select(self, weight):
         pass
@@ -41,3 +47,38 @@ class MainViewModel(BaseViewModel):
 
     def m_about_select(self, weight):
         print("about")
+
+    def all_treeview_click(self, weight, path, cow):
+        index = eval(str(path))
+        plugin = self.plugin_help.all_list[index]
+        module_name = f"Plugins.{plugin.name}.{plugin.start}"
+        # 动态导入模块
+        module = importlib.import_module(module_name)
+        # 获取模块中的类
+        Plugin = getattr(module, f"{plugin.start}")
+        # 使用 Plugin1 类
+        Plugin()
+
+    def col_treeview_click(self, weight, path, cow):
+        index = eval(str(path))
+        plugin = self.plugin_help.collected[index]
+        module_name = f"Plugins.{plugin.name}.{plugin.start}"
+        # 动态导入模块
+        module = importlib.import_module(module_name)
+        # 获取模块中的类
+        Plugin = getattr(module, f"{plugin.start}")
+        # 使用 Plugin1 类
+        Plugin()
+
+    def cat_treeview_clicked(self, weight, path, column):
+        index = eval(str(path))
+        key = weight.get_name()
+
+        plugin = self.plugin_help.categories[key][index]
+        module_name = f"Plugins.{plugin.name}.{plugin.start}"
+        # 动态导入模块
+        module = importlib.import_module(module_name)
+        # 获取模块中的类
+        Plugin = getattr(module, f"{plugin.start}")
+        # 使用 Plugin1 类
+        Plugin()

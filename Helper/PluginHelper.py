@@ -109,3 +109,11 @@ class PluginHelper(BaseModel):
             info_list = [plugin.name, plugin.version, plugin.c_name,
                          plugin.description, plugin.collected]
         return info_list
+
+    def re_init(self):
+        self._all_list = []
+        self._categories = {}
+        self._collected = []
+        self.load_all()
+        self.load_categories()
+        self.load_collect()

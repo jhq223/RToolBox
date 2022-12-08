@@ -34,6 +34,7 @@ class MainView(BaseView):
         builder.add_from_file(path)
 
         self.plugin_help = PluginHelper()
+        self.view_model.plugin_help = self.plugin_help
 
         # 加载全部插件
         self.all_list_store = Gtk.ListStore(str, str, str, str, bool, str)
@@ -42,6 +43,7 @@ class MainView(BaseView):
         self.all_treeview = builder.get_object("all_treeview")
         self.load_title_layout(self.all_treeview)
         self.all_treeview.set_model(self.all_list_store)
+        self.all_treeview.connect("row-activated", self.view_model.all_treeview_click)
 
         # 加载收藏插件
         self.col_list_store = Gtk.ListStore(str, str, str, str, str)
@@ -50,21 +52,23 @@ class MainView(BaseView):
         self.col_treeview = builder.get_object("col_treeview")
         self.load_title_layout(self.col_treeview, 1)
         self.col_treeview.set_model(self.col_list_store)
+        self.col_treeview.connect("row-activated", self.view_model.col_treeview_click)
 
         # 加载分类插件
         self.cat_box = builder.get_object("cat_box")
         self.cat_data = {}
         for cat in list(self.plugin_help.categories.keys()):
-            _ex = Gtk.Expander(label=cat, name=f"{cat}+_expander")
-            _tree = Gtk.TreeView(name=f"{cat}+_treeview")
+            _ex = Gtk.Expander(label=cat)
+            _tree = Gtk.TreeView(name=f"{cat}")
             self.cat_box.add(_ex)
             _ex.add(_tree)
             self.cat_data[cat] = Gtk.ListStore(str, str, str, str, bool)
             for plugin in self.plugin_help.categories[cat]:
                 self.cat_data[cat].append(PluginHelper.get_info(plugin, 2))
-                self.load_title_layout(_tree, 2)
-                _tree.set_model(self.cat_data[cat])
-
+            self.load_title_layout(_tree, 2)
+            _tree.set_model(self.cat_data[cat])
+            # Connect the event handler to the "row-activated" signal
+            _tree.connect("row-activated", self.view_model.cat_treeview_clicked)
 
         # 获取窗口对象
         self.window = builder.get_object("main_window")
