@@ -20,7 +20,7 @@ import os
 gi.require_version('Gtk', '3.0')
 from gi.repository import Gtk, GObject
 from Views.BaseView import BaseView
-
+from Helper.PluginHelper import PluginHelper
 
 class MainView(BaseView):
     def __init__(self, view_model):
@@ -32,12 +32,15 @@ class MainView(BaseView):
         path = os.path.join(dirpath, "main_window.glade")
         builder.add_from_file(path)
 
+        self.plugin_help = PluginHelper()
+        print(self.plugin_help.all_list)
+
         # 获取窗口对象
         self.window = builder.get_object("main_window")
 
         # 设置标题
         self.window.set_title("RToolBox")
-
+        self.window.set_position(Gtk.WindowPosition.CENTER)
         # 设置窗口大小
         self.window.set_default_size(800, 600)
 
