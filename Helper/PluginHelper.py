@@ -33,7 +33,7 @@ def load_from_json(config_path) -> Plugin:
     if collected is None:
         collected = False
     categorization = config.get("categorization")
-    plugin = Plugin(name,start,version,c_name,description,collected,categorization)
+    plugin = Plugin(name, start, version, c_name, description, collected, categorization)
     return plugin
 
 
@@ -41,6 +41,7 @@ class PluginHelper(BaseModel):
     """
     PluginHelper 类用于管理插件的信息。
     """
+
     def __init__(self):
         """
         始化 PluginHelper 类。
@@ -94,3 +95,9 @@ class PluginHelper(BaseModel):
             self._categories[category] = []
         else:
             self._categories[category].append(plugin)
+
+    @staticmethod
+    def get_info(plugin: Plugin) -> list:
+        info_list = [plugin.name, plugin.version, plugin.c_name,
+                     plugin.description, plugin.collected, plugin.categorization]
+        return info_list

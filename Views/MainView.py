@@ -22,6 +22,7 @@ from gi.repository import Gtk, GObject
 from Views.BaseView import BaseView
 from Helper.PluginHelper import PluginHelper
 
+
 class MainView(BaseView):
     def __init__(self, view_model):
         super(MainView, self).__init__(view_model)
@@ -33,7 +34,15 @@ class MainView(BaseView):
         builder.add_from_file(path)
 
         self.plugin_help = PluginHelper()
-        print(self.plugin_help.all_list)
+
+        # start
+
+        self.all_list_store = Gtk.ListStore(str, str, str, str, bool, str)
+        for plugin in self.plugin_help.all_list:
+            self.all_list_store.append(PluginHelper.get_info(plugin))
+        self.all_list_box = builder.get_object("all_list_box")
+        self.load_all_layout(self.all_list_box)
+        self.all_list_box.set_model(self.all_list_store)
 
         # 获取窗口对象
         self.window = builder.get_object("main_window")
@@ -67,3 +76,24 @@ class MainView(BaseView):
         # Show the window
         self.window.show_all()
         self.window.connect("destroy", Gtk.main_quit)
+
+    @staticmethod
+    def load_all_layout(all_list_box):
+        col1 = Gtk.TreeViewColumn("名称", Gtk.CellRendererText(), text=0)
+        # col1.set_min_width(-1)
+        all_list_box.append_column(col1)
+        col2 = Gtk.TreeViewColumn("版本", Gtk.CellRendererText(), text=1)
+        # col2.set_min_width(-1)
+        all_list_box.append_column(col2)
+        col3 = Gtk.TreeViewColumn("备注", Gtk.CellRendererText(), text=2)
+        # col3.set_min_width(-1)
+        all_list_box.append_column(col3)
+        col4 = Gtk.TreeViewColumn("描述", Gtk.CellRendererText(), text=3)
+        # col4.set_min_width(-1)
+        all_list_box.append_column(col4)
+        col5 = Gtk.TreeViewColumn("收藏", Gtk.CellRendererText(), text=4)
+        # col5.set_min_width(-1)
+        all_list_box.append_column(col5)
+        col6 = Gtk.TreeViewColumn("分类", Gtk.CellRendererText(), text=5)
+        # col6.set_min_width(-1)
+        all_list_box.append_column(col6)
