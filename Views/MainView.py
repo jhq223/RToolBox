@@ -35,14 +35,36 @@ class MainView(BaseView):
 
         self.plugin_help = PluginHelper()
 
-        # start
-
+        # 加载全部插件
         self.all_list_store = Gtk.ListStore(str, str, str, str, bool, str)
         for plugin in self.plugin_help.all_list:
             self.all_list_store.append(PluginHelper.get_info(plugin))
-        self.all_list_box = builder.get_object("all_list_box")
-        self.load_all_layout(self.all_list_box)
-        self.all_list_box.set_model(self.all_list_store)
+        self.all_treeview = builder.get_object("all_treeview")
+        self.load_title_layout(self.all_treeview)
+        self.all_treeview.set_model(self.all_list_store)
+
+        # 加载收藏插件
+        self.col_list_store = Gtk.ListStore(str, str, str, str, str)
+        for plugin in self.plugin_help.collected:
+            self.col_list_store.append(PluginHelper.get_info(plugin, 1))
+        self.col_treeview = builder.get_object("col_treeview")
+        self.load_title_layout(self.col_treeview, 1)
+        self.col_treeview.set_model(self.col_list_store)
+
+        # 加载分类插件
+        self.cat_box = builder.get_object("cat_box")
+        self.cat_data = {}
+        for cat in list(self.plugin_help.categories.keys()):
+            _ex = Gtk.Expander(label=cat, name=f"{cat}+_expander")
+            _tree = Gtk.TreeView(name=f"{cat}+_treeview")
+            self.cat_box.add(_ex)
+            _ex.add(_tree)
+            self.cat_data[cat] = Gtk.ListStore(str, str, str, str, bool)
+            for plugin in self.plugin_help.categories[cat]:
+                self.cat_data[cat].append(PluginHelper.get_info(plugin, 2))
+                self.load_title_layout(_tree, 2)
+                _tree.set_model(self.cat_data[cat])
+
 
         # 获取窗口对象
         self.window = builder.get_object("main_window")
@@ -78,22 +100,16 @@ class MainView(BaseView):
         self.window.connect("destroy", Gtk.main_quit)
 
     @staticmethod
-    def load_all_layout(all_list_box):
-        col1 = Gtk.TreeViewColumn("名称", Gtk.CellRendererText(), text=0)
-        # col1.set_min_width(-1)
-        all_list_box.append_column(col1)
-        col2 = Gtk.TreeViewColumn("版本", Gtk.CellRendererText(), text=1)
-        # col2.set_min_width(-1)
-        all_list_box.append_column(col2)
-        col3 = Gtk.TreeViewColumn("备注", Gtk.CellRendererText(), text=2)
-        # col3.set_min_width(-1)
-        all_list_box.append_column(col3)
-        col4 = Gtk.TreeViewColumn("描述", Gtk.CellRendererText(), text=3)
-        # col4.set_min_width(-1)
-        all_list_box.append_column(col4)
-        col5 = Gtk.TreeViewColumn("收藏", Gtk.CellRendererText(), text=4)
-        # col5.set_min_width(-1)
-        all_list_box.append_column(col5)
-        col6 = Gtk.TreeViewColumn("分类", Gtk.CellRendererText(), text=5)
-        # col6.set_min_width(-1)
-        all_list_box.append_column(col6)
+    def load_title_layout(weight, model: int = 0):
+        tittle_list1 = ["名称", "版本", "备注", "描述", "收藏", "分类"]
+        tittle_list2 = ["名称", "版本", "备注", "描述", "分类"]
+        tittle_list3 = ["名称", "版本", "备注", "描述", "收藏"]
+        if model == 0:
+            use_t = tittle_list1
+        elif model == 1:
+            use_t = tittle_list2
+        elif model == 2:
+            use_t = tittle_list3
+        for i, title in enumerate(use_t):
+            col = Gtk.TreeViewColumn(title, Gtk.CellRendererText(), text=i)
+            weight.append_column(col)

@@ -14,8 +14,8 @@
 """
 
 from ViewModels.BaseViewModel import BaseViewModel
-
-
+from ViewModels.SearchVIewModel import SearchViewModel
+from Views.SearchView import SearchView
 class MainViewModel(BaseViewModel):
     def __init__(self):
         super(MainViewModel, self).__init__()
@@ -27,7 +27,8 @@ class MainViewModel(BaseViewModel):
         pass
 
     def m_search_select(self, weight):
-        pass
+        search_model = SearchViewModel()
+        search_window = SearchView(search_model)
 
     def m_settings_select(self, weight):
         pass

@@ -93,11 +93,19 @@ class PluginHelper(BaseModel):
         # 如果字典中不存在该分类，则添加一个新的键值对
         if category not in self._categories:
             self._categories[category] = []
+            self._categories[category].append(plugin)
         else:
             self._categories[category].append(plugin)
 
     @staticmethod
-    def get_info(plugin: Plugin) -> list:
-        info_list = [plugin.name, plugin.version, plugin.c_name,
-                     plugin.description, plugin.collected, plugin.categorization]
+    def get_info(plugin: Plugin, model: int = 0) -> list:
+        if model == 0:
+            info_list = [plugin.name, plugin.version, plugin.c_name,
+                         plugin.description, plugin.collected, plugin.categorization]
+        elif model == 1:
+            info_list = [plugin.name, plugin.version, plugin.c_name,
+                         plugin.description, plugin.categorization]
+        elif model == 2:
+            info_list = [plugin.name, plugin.version, plugin.c_name,
+                         plugin.description, plugin.collected]
         return info_list

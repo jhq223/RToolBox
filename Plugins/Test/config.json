@@ -1,6 +1,5 @@
 {
     "name": "Test",
     "start": "Plugin1",
-    "version": "9.9.9",
-    "category": "测试"
+    "version": "9.9.9"
 }
