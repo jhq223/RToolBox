@@ -21,9 +21,9 @@ from Models.BaseModel import BaseModel
 from Models.Plugin import Plugin
 
 
-class ManegePlugin(BaseModel):
+class ManagePlugin(BaseModel):
     def __init__(self):
-        super(ManegePlugin, self).__init__()
+        super(ManagePlugin, self).__init__()
         self.dir_path = os.path.join(os.path.abspath('.'), "Plugins\\")
 
     def install_plugin_file(self, path) -> bool:

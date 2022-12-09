@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkWindow" id="new_window">
+    <property name="width-request">400</property>
+    <property name="height-request">300</property>
+    <property name="can-focus">False</property>
+    <property name="window-position">center</property>
+    <child>
+      <object class="GtkBox">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="valign">center</property>
+        <property name="margin-start">20</property>
+        <property name="margin-end">20</property>
+        <property name="margin-top">20</property>
+        <property name="margin-bottom">20</property>
+        <property name="vexpand">True</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkEntry" id="in_name">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="placeholder-text" translatable="yes">*插件名称(请使用英文)</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="in_start">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="placeholder-text" translatable="yes">*启动类</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="in_version">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="placeholder-text" translatable="yes">*版本</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="in_c_name">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="placeholder-text" translatable="yes">备注</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">3</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkEntry" id="in_des">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+            <property name="placeholder-text" translatable="yes">描述</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">4</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="btn_create">
+            <property name="label" translatable="yes">创建</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+            <property name="valign">end</property>
+            <property name="margin-top">10</property>
+            <property name="margin-bottom">10</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">6</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>

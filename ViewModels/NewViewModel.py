@@ -14,7 +14,7 @@
 """
 
 from ViewModels.BaseViewModel import BaseViewModel
-from Helper.ManagePlugin import ManegePlugin
+from Helper.ManagePlugin import ManagePlugin
 from Models.Plugin import Plugin
 import gi
 
@@ -25,7 +25,7 @@ from gi.repository import Gtk
 class NewViewModel(BaseViewModel):
     def __init__(self):
         super(NewViewModel, self).__init__()
-        self.manage_plugin = ManegePlugin()
+        self.manage_plugin = ManagePlugin()
 
     def create_click(self, weight):
         name = self.in_name.get_text()
