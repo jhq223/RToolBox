@@ -1,3 +1,3 @@
-class P4:
+class T1:
 	def __init__(self):
 		print("hello world!")

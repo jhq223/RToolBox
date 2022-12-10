@@ -72,3 +72,17 @@ class ManagePlugin(BaseModel):
             except Exception as ex:
                 print(ex)
             return True
+
+    def change_json(self, info: list, plugin: Plugin):
+        plugin_path = os.path.join(self.dir_path, plugin.name)
+        config_path = os.path.join(plugin_path, "config.json")
+        p_json = {"name": info[0],
+                  "start": plugin.start,
+                  "version": info[1],
+                  "c_name": info[2],
+                  "description": info[3],
+                  "collected": str(info[4]),
+                  "categorization": info[5]}
+        print(p_json)
+        with open(config_path, "w") as f:
+            f.write(json.dumps(p_json))

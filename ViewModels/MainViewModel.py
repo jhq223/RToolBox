@@ -16,7 +16,9 @@ import importlib
 import os
 
 from ViewModels.BaseViewModel import BaseViewModel
+from ViewModels.ManageViewModel import ManageViewModel
 from ViewModels.SearchViewModel import SearchViewModel
+from Views.ManageView import ManageView
 from Views.SearchView import SearchView
 from Views.NewView import NewView
 from ViewModels.NewViewModel import NewViewModel
@@ -39,7 +41,7 @@ class MainViewModel(BaseViewModel):
 
     def m_install_select(self, weight):
         dialog = Gtk.FileChooserDialog(
-            title="Please choose a file", action=Gtk.FileChooserAction.OPEN
+            title="请选择插件包", action=Gtk.FileChooserAction.OPEN
         )
         dialog.add_buttons(
             Gtk.STOCK_CANCEL,
@@ -94,7 +96,8 @@ class MainViewModel(BaseViewModel):
         SettingView(setting_model)
 
     def m_manage_select(self, weight):
-        pass
+        manage_view_model = ManageViewModel()
+        ManageView(manage_view_model)
 
     def m_help_select(self, weight):
         help_txt = """
