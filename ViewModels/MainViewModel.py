@@ -16,7 +16,7 @@ import importlib
 import os
 
 from ViewModels.BaseViewModel import BaseViewModel
-from ViewModels.SearchVIewModel import SearchViewModel
+from ViewModels.SearchViewModel import SearchViewModel
 from Views.SearchView import SearchView
 from Views.NewView import NewView
 from ViewModels.NewViewModel import NewViewModel
@@ -141,12 +141,7 @@ class MainViewModel(BaseViewModel):
         text_buffer.insert(text_buffer.get_start_iter(), help_txt)
         dialog_help.get_content_area().add(scrolled_window)
         dialog_help.show_all()
-        response = dialog_help.run()
-        if response == Gtk.ResponseType.OK:
-            print('OK')
-        else:
-            print('Cancel')
-
+        dialog_help.run()
         dialog_help.destroy()
 
     def m_about_select(self, weight):
@@ -158,8 +153,8 @@ class MainViewModel(BaseViewModel):
         about_dialog.set_version("1.0.0")
         about_dialog.set_copyright('Copyright (c) 2022 今何求')
         about_dialog.set_license_type(Gtk.License.MIT_X11)
-        about_dialog.set_comments('This is a program that does something useful.')
-        about_dialog.set_authors(['今何求', 'Jane Doe'])
+        about_dialog.set_comments('一个Python工具箱')
+        about_dialog.set_authors(['今何求'])
         about_dialog.set_website('https://blog.900803.xyz/')
         about_dialog.set_logo(scaled_pix_buf)
         about_dialog.set_position(Gtk.WindowPosition.CENTER)

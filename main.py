@@ -10,6 +10,7 @@ from ViewModels.MainViewModel import MainViewModel
 
 if __name__ == "__main__":
     settings = Gtk.Settings.get_default()
+    settings.set_property("gtk-font-name", "Sans 12")
     settings.set_property("gtk-theme-name", "Windows-10-3.2.1")
     settings.set_property("gtk-application-prefer-dark-theme", False)
     image_path = os.path.join(os.path.abspath('.'), 'app.png')
