@@ -21,6 +21,8 @@ from Views.SearchView import SearchView
 from Views.NewView import NewView
 from ViewModels.NewViewModel import NewViewModel
 from Helper.ManagePlugin import ManagePlugin
+from Views.SettingView import SettingView
+from ViewModels.SettingViewModel import SettingViewModel
 import gi
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GdkPixbuf
@@ -88,7 +90,8 @@ class MainViewModel(BaseViewModel):
         SearchView(search_model)
 
     def m_settings_select(self, weight):
-        pass
+        setting_model = SettingViewModel()
+        SettingView(setting_model)
 
     def m_manage_select(self, weight):
         pass
