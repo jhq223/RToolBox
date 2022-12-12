@@ -57,14 +57,23 @@ class PluginHelper(BaseModel):
 
     @property
     def all_list(self):
+        """
+                获取所有插件的列表。
+        """
         return self._all_list
 
     @property
     def categories(self):
+        """
+                获取所有插件的分类信息。
+        """
         return self._categories
 
     @property
     def collected(self):
+        """
+                获取所有插件的收藏信息。
+        """
         return self._collected
 
     def load_all(self):

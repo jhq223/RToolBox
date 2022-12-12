@@ -27,6 +27,12 @@ class ManagePlugin(BaseModel):
         self.dir_path = os.path.join(os.path.abspath('.'), "Plugins\\")
 
     def install_plugin_file(self, path) -> bool:
+        """
+               安装插件文件。
+
+               :param path: 插件文件的路径。
+               :return: 安装成功返回True，否则返回False。
+        """
         try:
             f = zipfile.ZipFile(path, 'r')
             if "config.json" in f.namelist():
@@ -43,6 +49,12 @@ class ManagePlugin(BaseModel):
             print(ex)
 
     def uninstall_plugin_file(self, plugin: Plugin) -> bool:
+        """
+                卸载插件文件。
+
+                :param plugin: 要卸载的插件。
+                :return: 卸载成功返回True，否则返回False。
+        """
         try:
             plugin_path = os.path.join(self.dir_path, plugin.name)
             shutil.rmtree(plugin_path)
@@ -50,6 +62,12 @@ class ManagePlugin(BaseModel):
             print(ex)
 
     def create_plugin_files(self, plugin: Plugin) -> bool:
+        """
+         创建插件文件。
+
+         :param plugin: 要创建的插件。
+         :return: 创建成功返回True，否则返回False。
+         """
         plugin_path = os.path.join(self.dir_path, plugin.name)
         config_path = os.path.join(plugin_path, "config.json")
         py_path = os.path.join(plugin_path, f"{plugin.start}.py")
@@ -74,6 +92,13 @@ class ManagePlugin(BaseModel):
             return True
 
     def change_json(self, info: list, plugin: Plugin):
+        """
+        将给定的信息写入config.json文件中，并将该文件存储在插件所对应的目录下。
+
+        :param info: 一个包含所需信息的列表。
+        :param plugin: 要创建的插件。
+        :return: 创建成功返回True，否则返回False。
+        """
         plugin_path = os.path.join(self.dir_path, plugin.name)
         config_path = os.path.join(plugin_path, "config.json")
         p_json = {"name": info[0],
@@ -83,6 +108,5 @@ class ManagePlugin(BaseModel):
                   "description": info[3],
                   "collected": str(info[4]),
                   "categorization": info[5]}
-        print(p_json)
         with open(config_path, "w") as f:
             f.write(json.dumps(p_json))
